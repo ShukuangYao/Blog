@@ -66,7 +66,7 @@ export default {
     title: "辣子鸡的博客",
     $markdown: undefined
   },
-  mounted() {
+  created() {
     this.$markdown = function (value) {
       return mavonEditor.markdownIt.render(value);
     };
