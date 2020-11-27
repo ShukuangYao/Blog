@@ -51,8 +51,10 @@
   </Layout>
 </template>
 <script>
+import mavonEditor from "mavon-editor";
 import { request } from "@/utils/request";
 export default {
+  name: 'blogDetail',
   data() {
     return {
       blog: {
@@ -70,7 +72,7 @@ export default {
       const { data } = await request.get(`gists/${this.blog.id}`);
       Object.keys(data.files).map((item) => {
         this.blog.title = item;
-        this.blog.content = this.$markdown(data.files[item]["content"]);
+        this.blog.content = mavonEditor.markdownIt.render(data.files[item]["content"]);
         this.blog.description = data.description;
         this.blog.createTime = this.$util.utcToLocal(data["created_at"]);
         this.blog.updateTime = this.$util.utcToLocal(data["updated_at"]);

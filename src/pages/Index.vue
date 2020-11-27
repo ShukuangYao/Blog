@@ -59,15 +59,21 @@ query{
 }
 </page-query>
 <script>
+import mavonEditor from "mavon-editor";
 export default {
-  name: 'newPage',
-  metaInfo:{
-    title: '辣子鸡的博客'
+  name: "homePage",
+  metaInfo: {
+    title: "辣子鸡的博客",
+  },
+  mounted() {
+    this.$markdown = function (value) {
+      return mavonEditor.markdownIt.render(value);
+    };
   },
   computed: {
-    blog(){
-      return this.$page.blogs.edges[0].node
-    }
-  }
+    blog() {
+      return this.$page.blogs.edges[0].node;
+    },
+  },
 };
 </script>

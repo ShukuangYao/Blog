@@ -72,7 +72,6 @@ module.exports = function (api) {
     const {id} = blogsData[0] 
     const singleBlog = addCollection('single')
     const {data: singleData} = await axios.get(`${baseUrl}gists/${id}`)
-    console.log({singleData})
     const files = Object.values(singleData.files) || []
     singleBlog.addNode({
       updated_at: singleData.updated_at,
@@ -83,10 +82,6 @@ module.exports = function (api) {
   })
 
   api.createPages(({ createPage }) => {
-    createPage({
-      path: '/',
-      component: './src/pages/new/Index.vue'
-    })
     // Use the Pages API here: https://gridsome.org/docs/pages-api/
   })
 }

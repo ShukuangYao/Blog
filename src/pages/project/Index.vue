@@ -190,7 +190,7 @@ query ($page: Int) {
 </page-query>
 <script>
 export default {
-  name: "Project",
+  name: "projectPage",
   data() {
     return {
       searchKey: "",

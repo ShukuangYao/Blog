@@ -145,7 +145,7 @@ query ($page: Int) {
 </page-query>
 <script>
 export default {
-  name: "blog",
+  name: "blogPage",
   data() {
     return {
 			searchKey: "",

@@ -110,7 +110,7 @@ query ($page: Int) {
 </page-query>
 <script>
     export default {
-        name: 'newPage',
+        name: 'socialPage',
         metaInfo:{
             title: '辣子鸡的博客'
         },

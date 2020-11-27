@@ -110,7 +110,10 @@
 <script>
 import { request } from "@/utils/request";
 import { Base64 } from "js-base64";
+import mavonEditor from "mavon-editor";
+
 export default {
+  name: 'projectDetail',
   data() {
     return {
       project: {
@@ -122,7 +125,7 @@ export default {
   },
   computed: {},
   async mounted() {
-    this.loading = true;
+		this.loading = true;
     try {
       const [{ data }, { data: mdData }] = await Promise.all(
         [request.get(`repos/${this.login}/${this.project.name}`),
@@ -132,7 +135,7 @@ export default {
       );
       this.project = {
         ...data,
-        content: this.$markdown(Base64.decode(mdData.content)),
+        content: mavonEditor.markdownIt.render(Base64.decode(mdData.content)),
       };
     } finally {
       this.loading = false;

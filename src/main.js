@@ -4,7 +4,6 @@
 import DefaultLayout from '~/layouts/Default.vue'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-import mavonEditor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
 import 'mavon-editor/dist/markdown/github-markdown.min.css'
 import util from './utils/util'
@@ -14,9 +13,7 @@ export default function (Vue, { router, head, isClient }) {
   Vue.component('Layout', DefaultLayout)
   Vue.use(ElementUI)
   Vue.use(mavonEditor)
-  Vue.prototype.$markdown = function (value) {
-    return mavonEditor.markdownIt.render(value)
-  }
+
   Vue.prototype.$util = util
   Vue.prototype.$share = function (message) {
     if (!message) {
