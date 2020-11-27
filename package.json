@@ -1,0 +1,17 @@
+{
+  "name": "Blog",
+  "private": true,
+  "scripts": {
+    "build": "gridsome build",
+    "develop": "gridsome develop",
+    "explore": "gridsome explore"
+  },
+  "dependencies": {
+    "axios": "^0.21.0",
+    "datejs": "^1.0.0-rc3",
+    "element-ui": "^2.14.1",
+    "gridsome": "^0.7.0",
+    "js-base64": "^3.6.0",
+    "mavon-editor": "^2.9.0"
+  }
+}
