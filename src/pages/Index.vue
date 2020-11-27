@@ -64,9 +64,9 @@ export default {
   name: "homePage",
   metaInfo: {
     title: "辣子鸡的博客",
-    $markdown: undefined
+    $markdown: function(){}
   },
-  created() {
+  mounted() {
     this.$markdown = function (value) {
       return mavonEditor.markdownIt.render(value);
     };
