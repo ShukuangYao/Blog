@@ -36,13 +36,13 @@
             <el-row>
               <el-col :span="16">
                 <span>
-                  <router-link
+                  <g-link
                     style="text-decoration: none; cursor: pointer"
                     :to="'/project/details/' + item.node.name+'?login='+item.node.owner.login"
                   >
                     <i class="el-icon-service"></i>&nbsp;&nbsp;
                     {{ item.node.name }}
-                  </router-link>
+                  </g-link>
                 </span>
               </el-col>
               <el-col :span="8">

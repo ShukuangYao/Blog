@@ -21,7 +21,7 @@
           <pre style="font-family: '微软雅黑'">{{ blog.description }}</pre>
         </div>
         <div
-          v-html="$markdown(blog.content)"
+          v-html="blog.content"
           class="markdown-body"
           style="padding-top: 20px"
         ></div>
@@ -59,21 +59,17 @@ query{
 }
 </page-query>
 <script>
-import mavonEditor from "mavon-editor";
 export default {
   name: "homePage",
   metaInfo: {
     title: "辣子鸡的博客",
-    $markdown: function(){}
-  },
-  mounted() {
-    this.$markdown = function (value) {
-      return mavonEditor.markdownIt.render(value);
-    };
   },
   computed: {
     blog() {
-      return this.$page.blogs.edges[0].node;
+      return {
+        ...this.$page.blogs.edges[0].node,
+        content: process.isClient ? require("mavon-editor").markdownIt.render(this.$page.blogs.edges[0].node.content) : this.$page.blogs.edges[0].node.content
+      }
     },
   },
 };

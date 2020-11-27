@@ -9,7 +9,7 @@
                                 <el-col :span="8" v-for="(item,index) in $page.followers.edges" :key="'followers'+index" style="padding: 10px">
                                     <el-card shadow="hover" style="font-size: 13px;color: #606266;line-height: 20px">
                                         <i class="el-icon-star-off"></i>&emsp;
-                                        <router-link :to="'/social/details/'+item.node.login"  style=" text-decoration:none;cursor:pointer">{{item.node.login}}</router-link>
+                                        <g-link :to="'/social/details/'+item.node.login"  style=" text-decoration:none;cursor:pointer">{{item.node.login}}</g-link>
                                         <br>
                                         <i class="el-icon-message"></i>&emsp;
                                         <a :href="item.node.html_url" target="_blank" style=" text-decoration:none;cursor:pointer">TA的主页</a>
@@ -40,7 +40,7 @@
                                 <el-col :span="8" v-for="(item,index) in $page.followings.edges" :key="'following'+index" style="padding: 10px">
                                     <el-card shadow="hover" style="font-size: 13px;color: #606266;line-height: 20px">
                                         <i class="el-icon-star-off"></i>&emsp;
-                                        <router-link :to="'/social/details/'+item.node.login"  style=" text-decoration:none;cursor:pointer">{{item.node.login}}</router-link>
+                                        <g-link :to="'/social/details/'+item.node.login"  style=" text-decoration:none;cursor:pointer">{{item.node.login}}</g-link>
                                         <br>
                                         <i class="el-icon-message"></i>&emsp;
                                         <a :href="item.node.html_url" target="_blank" style=" text-decoration:none;cursor:pointer">TA的主页</a>

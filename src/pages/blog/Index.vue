@@ -45,13 +45,13 @@
             <el-row>
               <el-col :span="16">
                 <span>
-                  <router-link
+                  <g-link
                     style="text-decoration: none; cursor: pointer"
                     :to="'/blog/details/'+item.node.id"
                   >
                     <i class="el-icon-edit-outline"></i>&nbsp;&nbsp;
                     {{ item.node.filename }}
-                  </router-link>
+                  </g-link>
                 </span>
               </el-col>
               <el-col :span="8">
