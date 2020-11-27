@@ -21,7 +21,7 @@
           <pre style="font-family: '微软雅黑'">{{ blog.description }}</pre>
         </div>
         <div
-          v-html="this.$markdown(blog.content)"
+          v-html="$markdown(blog.content)"
           class="markdown-body"
           style="padding-top: 20px"
         ></div>
@@ -64,6 +64,7 @@ export default {
   name: "homePage",
   metaInfo: {
     title: "辣子鸡的博客",
+    $markdown: undefined
   },
   mounted() {
     this.$markdown = function (value) {
