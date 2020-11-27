@@ -12,7 +12,6 @@ export default function (Vue, { router, head, isClient }) {
   // Set default layout as a global component
   Vue.component('Layout', DefaultLayout)
   Vue.use(ElementUI)
-  Vue.use(mavonEditor)
 
   Vue.prototype.$util = util
   Vue.prototype.$share = function (message) {
