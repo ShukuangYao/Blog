@@ -35,17 +35,17 @@
                 </el-tab-pane>
                 <el-tab-pane :label="'关注 '+user.following" name="following" style="padding: 5px">
                     <div>
-                        <div v-if="followings.length">
+                        <div v-if="$page.followings.edges.length">
                             <el-row style="min-height: 200px; ">
-                                <el-col :span="8" v-for="(item,index) in followings" :key="'following'+index" style="padding: 10px">
+                                <el-col :span="8" v-for="(item,index) in $page.followings.edges" :key="'following'+index" style="padding: 10px">
                                     <el-card shadow="hover" style="font-size: 13px;color: #606266;line-height: 20px">
                                         <i class="el-icon-star-off"></i>&emsp;
-                                        <router-link :to="'/social/details/'+item.login"  style=" text-decoration:none;cursor:pointer">{{item.login}}</router-link>
+                                        <router-link :to="'/social/details/'+item.node.login"  style=" text-decoration:none;cursor:pointer">{{item.node.login}}</router-link>
                                         <br>
                                         <i class="el-icon-message"></i>&emsp;
-                                        <a :href="item.html_url" target="_blank" style=" text-decoration:none;cursor:pointer">TA的主页</a>
+                                        <a :href="item.node.html_url" target="_blank" style=" text-decoration:none;cursor:pointer">TA的主页</a>
                                         <br>
-                                        <img :src="item.avatar_url" style="width: 100%;border-radius:5px;margin-top: 5px">
+                                        <img :src="item.node.avatar_url" style="width: 100%;border-radius:5px;margin-top: 5px">
                                     </el-card>
                                 </el-col>
                             </el-row>
@@ -53,7 +53,7 @@
                                 <el-pagination 
                                     @current-change="onSelect" background layout="prev, pager, next" 
                                     :current-page="$route.params.page || 1"
-                                    :page-size="9" :total="user.following">
+                                    :page-size="5" :total="user.following">
                                 </el-pagination>
                             </div>
                         </div>
@@ -93,6 +93,20 @@ query ($page: Int) {
             }
         }
     }
+    followings: allFollowing(perPage: 5, page: $page) @paginate{
+        pageInfo {
+            totalPages
+            currentPage
+        }
+        edges{
+            node{
+                id
+                login
+                html_url
+                avatar_url
+            }
+        }
+    }
 }
 </page-query>
 <script>
@@ -111,11 +125,7 @@ import {request} from '@/utils/request'
         computed: {
             user(){
                 return this.$page.users.edges[0].node
-            }
-        },
-        async mounted () {
-            const {data} = await request.get(`users/${this.user.githubUsername}/following?page=${this.$route.params.page || 1}&per_page=9`)
-            this.followings = data
+            },
         },
         watch: {
             activeTab:function(newVal){
@@ -133,10 +143,6 @@ import {request} from '@/utils/request'
                         activeTab: this.activeTab
                     }
                 })
-                if(this.activeTab === 'following'){
-                    const {data} = await request.get(`users/${this.user.githubUsername}/following?page=${this.$route.params.page || 1}&per_page=9`)
-                    this.followings = data
-                }
             },
         }
     }
