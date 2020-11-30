@@ -21,7 +21,7 @@
                             <div style="text-align: center;margin-top: 10px">
                                 <el-pagination 
                                     @current-change="onSelect" background layout="prev, pager, next" 
-                                    :current-page="$page.followers.pageInfo.currentPage"
+                                    :current-page="parseInt($page.followers.pageInfo.currentPage || 1)"
                                     :page-size="9" :total="$page.followers.pageInfo.totalPages * 9">
                                 </el-pagination>
                             </div>
@@ -119,16 +119,11 @@ import {request} from '@/utils/request'
         },
         watch: {
             activeTab:function(newVal){
-                this.$router.push({
-                    url: '/social',
-                    query:{
-                        activeTab: newVal
-                    }
-                })
-            }
+                this.$router.push('/social?activeTab='+newVal)
+            },
         },
         methods: {
-            onSelect(page) {
+            async onSelect(page) {
                 this.$router.push({
                     url: '/social',
                     params: {
@@ -138,6 +133,10 @@ import {request} from '@/utils/request'
                         activeTab: this.activeTab
                     }
                 })
+                if(this.activeTab === 'following'){
+                    const {data} = await request.get(`users/${this.user.githubUsername}/following?page=${this.$route.params.page || 1}&per_page=9`)
+                    this.followings = data
+                }
             },
         }
     }
